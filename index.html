@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      user-select: none;
+    }
+
+    .calculator {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+    }
+
+    #display {
+      grid-column: span 4;
+      height: 50px;
+      font-size: 20px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      overflow-x: auto;
+    }
+
+    .btn {
+      width: 100%;
+      height: 50px;
+      font-size: 20px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffdbdb;
+      color: #333;
+      transition: background-color 0.3s;
+      border: none;
+    }
+
+    .btn:hover {
+      background-color: #ddd;
+    }
+
+    .bg-orange {
+      background-color: #ff7f50;
+      color: #fff;
+    }
+
+    .equals {
+      grid-column: span 2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="calculator">
+    <div id="display"></div>
+    <button class="btn" value="7">7</button>
+    <button class="btn" value="8">8</button>
+    <button class="btn" value="9">9</button>
+    <button class="btn bg-orange" value="/">/</button>
+    <button class="btn bg-orange" value="+">+</button>
+
+    <button class="btn" value="4">4</button>
+    <button class="btn" value="5">5</button>
+    <button class="btn" value="6">6</button>
+    <button class="btn bg-orange" value="*">*</button>
+    <button class="btn" value="1">1</button>
+    <button class="btn" value="2">2</button>
+    <button class="btn" value="3">3</button>
+    <button class="btn bg-orange" value="-">-</button>
+    <button class="btn" value="0">0</button>
+    <button class="btn" value="00">00</button>
+    <button class="btn" value=".">.</button>
+    <button class="btn equals bg-orange" onclick="equal()">=</button>
+    <button class="btn" onclick="ac()">ac</button>
+    <button class="btn" onclick="c()">C</button>
+
+  </div>
+  <script>
+    let display = document.getElementById("display");
+    let btns = document.querySelectorAll("button");
+    btns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        let n = display.textContent += btn.value;
+        display.value = n;
+      })
+    });
+    function equal() {
+      try {
+        let rs = display.value;
+        let n = parseFloat(eval(rs));
+        display.textContent = n;
+      } catch (error) {
+        display.textContent= "Enter a valid Formate" || 0;
+      }
+      
+    }
+    function ac(){
+       display.textContent = "";
+    }
+    function c() {
+    let rs = display.value;
+    let frs = rs.slice(0, -1);
+    display.textContent = frs;
+}
+
+  </script>
+</body>
+
+</html>
